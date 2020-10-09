@@ -16,25 +16,31 @@ helloWorld name =
   print <| "Hello, " ++ name ++ "!"
 ```
 
-Each first class citizen has the common python magic attributes:
+Each first class citizen has the common python magic attributes. These can be overwritten/implemented typewise as follows:
 ```
 type alias B e = 
   ...
 
-__repr__ : B e -> String
-__str__ : B e -> String
-__contains__: B e -> e -> Maybe e
-__iter__ : B e -> Iterable e
+(B e).__repr__ : B e -> String
+B.__str__ : B e -> String
+B.__contains__: B e -> e -> Maybe e
+B.__iter__ : B e -> Iterable e
 ```
+Each instance of a type has these variables preset but may also overwrite them:
 
-such that
+```
+updateView : B e -> B e
+updateView old = 
+  { old | __str__ = \x -> ((B e).__str__ x) + " made by me" }
+```
+additionally:
 ```
 for i in b:
   i^2
 ```
 will be translated into
 ```
-map (\i -> i^2) (B.__iter__ b)
+map (\i -> i^2) (b.__iter__ b)
 ```
 but 
 ```
