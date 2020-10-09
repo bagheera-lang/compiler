@@ -17,7 +17,16 @@ helloWorld name =
 ```
 
 Each first class citizen has the common python magic attributes:
-```__repr__, __str__, __contains__, __iter__```
+```
+type alias B e = 
+  ...
+
+__repr__ : B e -> String
+__str__ : B e -> String
+__contains__: B e -> e -> Maybe e
+__iter__ : B e -> Iterable e
+```
+
 such that
 ```
 for i in b:
@@ -25,7 +34,7 @@ for i in b:
 ```
 will be translated into
 ```
-map (\i -> i^2) b.__iter__
+map (\i -> i^2) (B.__iter__ b)
 ```
 but 
 ```
