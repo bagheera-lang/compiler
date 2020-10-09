@@ -18,6 +18,25 @@ helloWorld name =
 
 Each first class citizen has the common python magic attributes:
 ```__repr__, __str__, __contains__, __iter__```
+such that
+```
+for i in b:
+  i^2
+```
+will be translated into
+```
+map (\i -> i^2) b.__iter__
+```
+but 
+```
+if i in b:
+  doStuff
+```
+will become
+```
+if b.__contains__
+  doStuff
+```
 
 
 Contract: (TODO)
