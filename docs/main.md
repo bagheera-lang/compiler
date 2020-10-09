@@ -34,8 +34,21 @@ if i in b:
 ```
 will become
 ```
-if b.__contains__
+if b.__contains__ i:
   doStuff
+```
+and finally 
+```
+case b[i]:
+  Nothing ->
+    someStuff
+  Just v ->
+    someOtherStuff v
+```
+will become
+```
+case b.__contains__ i:
+  ...
 ```
 
 
